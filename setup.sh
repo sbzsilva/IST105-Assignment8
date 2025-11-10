@@ -2,8 +2,8 @@
 
 # Configuration variables
 KEY_NAME="IST105-Assignment8"  # Using the provided key pair name
-AMI_ID="ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI
-INSTANCE_TYPE="t2.micro"
+AMI_ID="ami-0fc5d935ebf8bc3bc"  # Updated AMI ID
+INSTANCE_TYPE="t3.medium"       # Updated instance type
 TAG_NAME="Assignment8"
 SECURITY_GROUP_WEB="webserver-sg"
 SECURITY_GROUP_MONGO="mongodb-sg"
