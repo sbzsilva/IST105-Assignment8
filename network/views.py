@@ -83,11 +83,16 @@ def index(request):
             if mac_address in current_leases:
                 lease_info = current_leases[mac_address]
                 lease_start = lease_info['timestamp']
-                if (current_time - lease_start).total_seconds() < lease_time:
-                    # Lease is still valid, return the same IP
+                # Check if the existing lease matches the requested DHCP version
+                existing_ip = lease_info['assigned_ip']
+                existing_is_ipv4 = existing_ip.startswith('192.168.1.')
+                requested_is_ipv4 = (dhcp_version == 'DHCPv4')
+                
+                if (current_time - lease_start).total_seconds() < lease_time and existing_is_ipv4 == requested_is_ipv4:
+                    # Lease is still valid and matches the requested version, return the same IP
                     assigned_ip = lease_info['assigned_ip']
                 else:
-                    # Lease expired, generate a new IP
+                    # Lease expired or version mismatch, generate a new IP
                     if dhcp_version == 'DHCPv4':
                         assigned_ip = generate_ipv4()
                     else:  # DHCPv6
