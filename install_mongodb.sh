@@ -14,12 +14,22 @@ gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc" | sudo tee /etc/yum.re
 # Install MongoDB
 sudo yum install -y mongodb-org
 
-# Configure MongoDB to accept remote connections
-sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/g' /etc/mongod.conf
-
 # Start MongoDB service
 sudo systemctl start mongod
 sudo systemctl enable mongod
+
+# Configure MongoDB to accept remote connections
+sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/g' /etc/mongod.conf
+sudo systemctl restart mongod
+
+# Open firewall for MongoDB (if firewalld is installed)
+if command -v firewall-cmd &> /dev/null; then
+    sudo firewall-cmd --permanent --add-port=27017/tcp
+    sudo firewall-cmd --reload
+fi
+
+# Install git to clone repository (optional, for verification)
+sudo yum install git -y
 
 # Create the assignment8 database and results collection
 mongo --eval "use assignment8; db.createCollection('results')"
