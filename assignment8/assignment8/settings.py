@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!%ox*xtwlq(=&3s%wrx928p!#w1-66%@@pa-%g)pyf--krli+s'
+SECRET_KEY = 'django-insecure-538fpen=i+%hw*f=13z-y=@wd6r#x!qx956*%s=&pm+-dtb$uy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -56,7 +55,7 @@ ROOT_URLCONF = 'assignment8.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'bitwise' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,11 +119,5 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
-# MongoDB connection settings
-MONGODB_HOST = os.environ.get('MONGODB_HOST', 'localhost')
-MONGODB_PORT = int(os.environ.get('MONGODB_PORT', 27017))
-MONGODB_DB = os.environ.get('MONGODB_DB', 'assignment8')
-MONGODB_COLLECTION = os.environ.get('MONGODB_COLLECTION', 'results')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

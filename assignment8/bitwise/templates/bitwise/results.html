@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IP Assignment Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .result-item {
+            margin-bottom: 10px;
+        }
+        .result-label {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .nav {
+            margin-bottom: 20px;
+        }
+        .nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        .nav a.active {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="{% url 'index' %}">Request IP</a>
+        <a href="{% url 'view_leases' %}">View Leases</a>
+    </div>
+    
+    <h1>IP Assignment Result</h1>
+    
+    <div class="result">
+        <div class="result-item">
+            <span class="result-label">MAC Address:</span>
+            {{ mac_address }}
+        </div>
+        <div class="result-item">
+            <span class="result-label">DHCP Version:</span>
+            {{ dhcp_version }}
+        </div>
+        <div class="result-item">
+            <span class="result-label">Assigned IP:</span>
+            {{ assigned_ip }}
+        </div>
+        <div class="result-item">
+            <span class="result-label">Lease Time:</span>
+            {{ lease_time }}
+        </div>
+        <div class="result-item">
+            <span class="result-label">MAC Sum Parity:</span>
+            {{ mac_sum_parity }}
+        </div>
+    </div>
+    
+    <button onclick="window.location.href='{% url \'index\' %}'">New Request</button>
+</body>
+</html>

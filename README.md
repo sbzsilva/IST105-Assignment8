@@ -1,33 +1,39 @@
-# IST105 - Assignment 8
+# IST105 Assignment 8: Network Automation Web Application
 
 ## Description
-This is a Django web application that processes numerical inputs, performs various calculations and checks, and stores the data in MongoDB.
+This is a Django web application that simulates DHCPv4 and DHCPv6 IP assignment. It accepts MAC addresses and DHCP versions as input, generates appropriate IP addresses, and stores the lease information in a MongoDB database.
 
 ## Features
-- Accepts five numerical inputs
-- Validates inputs (numeric, non-negative)
-- Calculates average and checks if it's greater than 50
-- Counts positive values and determines if the count is even or odd using bitwise operations
-- Creates a new list with values greater than 10 and sorts it
-- Saves input and output to MongoDB
-- Displays results in a formatted HTML page
+- Accepts MAC address and DHCP version (DHCPv4 or DHCPv6) through a web form
+- Validates MAC address format
+- Generates IPv4 addresses from 192.168.1.0/24 pool for DHCPv4
+- Generates IPv6 addresses using EUI-64 format for DHCPv6
+- Uses bitwise operations to manipulate MAC address bytes
+- Stores all lease information in MongoDB
+- Provides a page to view all DHCP leases
 
 ## Setup Instructions
+1. Create two EC2 instances: one for the Django web server (Amazon Linux 2) and one for MongoDB (Ubuntu)
+2. Configure security groups appropriately
+3. Install required software on both instances
+4. Clone this repository on the web server instance
+5. Update the MongoDB connection string in views.py with the private IP of the MongoDB instance
+6. Run the Django application
 
-### Option 1: Automated Setup (using setup.sh)
-1. Create two EC2 instances (WebServer-EC2 and MongoDB-EC2)
-2. Install Django on WebServer-EC2
-3. Install MongoDB on MongoDB-EC2
-4. Clone this repository to WebServer-EC2
-5. Set environment variables for MongoDB connection
-6. Run migrations and start the Django server
+## Branches
+- main: Final stable code
+- development: Testing integration
+- feature1: For initial bitwise/IP assignment logic
 
-### Option 2: Manual Setup (using individual scripts)
-1. Run `setup_ec2.sh` to create EC2 instances and security groups
-2. Run `install_mongodb.sh` on the MongoDB instance
-3. Run `install_webserver.sh` on the WebServer instance
-4. Update MongoDB connection settings in environment variables
-5. Run migrations and start the Django server
-
-## Usage
-Access the application at http://<WebServer-EC2-Public-IP>:8000
+## How to Run
+1. Navigate to the project directory
+2. Run migrations: 
+   ```
+   python3 manage.py makemigrations
+   python3 manage.py migrate
+   ```
+3. Start the development server:
+   ```
+   python3 manage.py runserver 0.0.0.0:8000
+   ```
+4. Access the application at http://<WebServer-EC2-Public-IP>:8000

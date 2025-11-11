@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Network Configuration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .nav {
+            margin-bottom: 20px;
+        }
+        .nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        .nav a.active {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="{% url 'index' %}" class="active">Request IP</a>
+        <a href="{% url 'view_leases' %}">View Leases</a>
+    </div>
+    
+    <h1>Network Configuration</h1>
+    
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.mac_address.id_for_label }}">MAC Address:</label>
+            {{ form.mac_address }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.dhcp_version.id_for_label }}">DHCP Version:</label>
+            {{ form.dhcp_version }}
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
