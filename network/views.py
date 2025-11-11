@@ -4,10 +4,10 @@ import pymongo
 from datetime import datetime, timedelta
 import re
 
-# MongoDB connection
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-db = client["dhcp_leases"]
-leases_collection = db["leases"]
+# MongoDB connection - REMOTE SERVER
+client = pymongo.MongoClient("mongodb://3.239.80.34:27017/")
+db = client["assignment8"]
+leases_collection = db["results"]
 
 # Dictionary to maintain current leases
 current_leases = {}
