@@ -2,11 +2,25 @@
 
 # Configuration variables
 KEY_NAME="IST105-Assignment8"
-AMI_ID="ami-0fc5d935ebf8bc3bc"  # Amazon Linux 2023 AMI
 INSTANCE_TYPE="t3.medium"
 TAG_NAME="Assignment8"
 SECURITY_GROUP_WEB="webserver-sg"
 SECURITY_GROUP_MONGO="mongodb-sg"
+
+# Fetch the latest Amazon Linux 2023 AMI ID dynamically
+echo "Fetching latest Amazon Linux 2023 AMI ID..."
+AMI_ID=$(aws ssm get-parameters \
+    --names /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64 \
+    --query 'Parameters[0].Value' \
+    --output text)
+
+# Check if AMI ID was obtained successfully
+if [ $? -ne 0 ] || [ -z "$AMI_ID" ]; then
+    echo "Error: Failed to retrieve AMI ID. Please check your AWS credentials and region configuration."
+    exit 1
+fi
+
+echo "Using AMI ID: $AMI_ID"
 
 # Create security groups
 echo "Creating security groups..."
