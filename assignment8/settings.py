@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bitwise',
+    'network',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'assignment8.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'bitwise' / 'templates'],
+        'DIRS': [BASE_DIR / 'network' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

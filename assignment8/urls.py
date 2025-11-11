@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from bitwise.views import index, view_leases
+from network.views import index, view_leases
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -70,7 +70,7 @@ def index(request):
             
             # Validate MAC address
             if not validate_mac_address(mac_address):
-                return render(request, 'bitwise/index.html', {
+                return render(request, 'network/index.html', {
                     'form': form,
                     'error': 'Invalid MAC address format. Please use format like 00:1A:2B:3C:4D:5E'
                 })
@@ -128,7 +128,7 @@ def index(request):
             leases_collection.insert_one(lease_data)
             
             # Display result
-            return render(request, 'bitwise/results.html', {
+            return render(request, 'network/results.html', {
                 'mac_address': mac_address,
                 'dhcp_version': dhcp_version,
                 'assigned_ip': assigned_ip,
@@ -138,10 +138,10 @@ def index(request):
     else:
         form = NetworkConfigForm()
     
-    return render(request, 'bitwise/index.html', {'form': form})
+    return render(request, 'network/index.html', {'form': form})
 
 def view_leases(request):
     """View all DHCP leases from MongoDB"""
     leases = list(leases_collection.find().sort("timestamp", -1))  # Sort by timestamp, newest first
     
-    return render(request, 'bitwise/leases.html', {'leases': leases})
+    return render(request, 'network/leases.html', {'leases': leases})
